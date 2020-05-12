@@ -1,0 +1,19 @@
+version: '3'
+services:
+  consumer:
+    build: ./consumer
+    restart: on-failure
+    depends_on:
+    - rabbitmq
+
+  publisher:
+    build: ./publisher
+    restart: on-failure
+    depends_on:
+    - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+    - "5672:5672"
+    - "15672:15672"
